@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tu Web con IA en un Día · Plataforma</title>
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#fbf6ee">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307080c'/%3E%3Ctext x='32' y='45' font-family='Arial' font-weight='900' font-size='34' text-anchor='middle' fill='%23e50914'%3EW%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#fffaf3">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307080c'/%3E%3Ctext x='32' y='45' font-family='Arial' font-weight='900' font-size='34' text-anchor='middle' fill='%23ea580c'%3EW%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -15,22 +15,22 @@
    PICTURE: portada con la próxima clase y el anillo de avance del día
    COLOUR and TYPE: blanco y gris niebla, tinta azul noche, rojo GROW para acciones, color por módulo en las miniaturas; Inter
    LAYOUT: nav fija, portada, ruta, filas por módulo, skill, recursos, beneficios */
-:root{--bg:#edf3fb;--bg2:#ffffff;--card:#ffffff;--line:#e6e9f0;--ink:#0f172a;--ink2:#334155;--mute:#64748b;--red:#e50914;--ok:#16a34a;--sh:0 1px 2px rgba(15,23,42,.05),0 12px 30px -16px rgba(15,23,42,.2)}
+:root{--bg:#eef4ff;--bg2:#ffffff;--card:#ffffff;--line:#e6e9f0;--ink:#0f172a;--ink2:#334155;--mute:#64748b;--red:#ea580c;--blue:#1d4ed8;--ok:#16a34a;--sh:0 1px 2px rgba(15,23,42,.05),0 12px 30px -16px rgba(15,23,42,.2)}
 *{box-sizing:border-box;min-width:0;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
 body{background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
 button,input{font:inherit;color:inherit}button{background:none;border:0;cursor:pointer}a{color:inherit}
 :focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:6px}
-.nav{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:22px;padding:14px max(4vw,16px);background:rgba(251,246,238,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:22px;padding:14px max(4vw,16px);background:rgba(255,250,243,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .logo{font-weight:900;letter-spacing:.03em;font-size:19px;white-space:nowrap;text-decoration:none;color:var(--ink)}.logo b{color:var(--red)}
-.links{display:flex;gap:18px;font-size:14px;color:var(--ink2);overflow-x:auto;scrollbar-width:none}.links a{text-decoration:none;white-space:nowrap}.links a:hover{color:var(--red)}
+.links{display:flex;gap:18px;font-size:14px;color:var(--ink2);overflow-x:auto;scrollbar-width:none}.links a{text-decoration:none;white-space:nowrap}.links a:hover{color:var(--blue)}
 .who{margin-left:auto;font-size:13px;color:var(--mute);white-space:nowrap}.who b{color:var(--ink)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:10px;font-weight:800;font-size:15px;text-decoration:none;transition:transform .15s,box-shadow .2s}
-.btn:active{transform:scale(.97)}.btn.red{background:var(--red);color:#fff;box-shadow:0 10px 24px -12px rgba(229,9,20,.7)}.btn.ghost{background:#fff;border:1px solid var(--line);color:var(--ink)}.btn.sm{min-height:38px;padding:0 14px;font-size:13px}
+.btn:active{transform:scale(.97)}.btn.red{background:var(--red);color:#fff;box-shadow:0 10px 24px -12px rgba(234,88,12,.7)}.btn.ghost{background:#fff;border:1px solid var(--line);color:var(--ink)}.btn.sm{min-height:38px;padding:0 14px;font-size:13px}
 /* hero */
-.hero{position:relative;padding:clamp(34px,6vw,70px) max(4vw,16px) 34px;background:radial-gradient(800px 420px at 90% 0%,color-mix(in srgb,var(--hc) 18%,transparent),transparent 70%),radial-gradient(600px 360px at 0% 100%,rgba(250,204,21,.12),transparent 70%),#fbf6ee;border-bottom:1px solid var(--line)}
+.hero{position:relative;padding:clamp(34px,6vw,70px) max(4vw,16px) 34px;background:radial-gradient(800px 420px at 90% 0%,color-mix(in srgb,var(--hc) 18%,transparent),transparent 70%),radial-gradient(600px 360px at 0% 100%,rgba(250,204,21,.12),transparent 70%),#fffaf3;border-bottom:1px solid var(--line)}
 .hgrid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(20px,4vw,48px);align-items:center;max-width:1240px}
-.tag{display:inline-block;font-size:12px;font-weight:800;padding:5px 11px;border-radius:99px;background:color-mix(in srgb,var(--hc,#e50914) 12%,#fff);color:color-mix(in srgb,var(--hc,#e50914) 80%,#000);border:1px solid color-mix(in srgb,var(--hc,#e50914) 30%,#fff);margin-bottom:12px}
+.tag{display:inline-block;font-size:12px;font-weight:800;padding:5px 11px;border-radius:99px;background:color-mix(in srgb,var(--hc,#ea580c) 12%,#fff);color:color-mix(in srgb,var(--hc,#ea580c) 80%,#000);border:1px solid color-mix(in srgb,var(--hc,#ea580c) 30%,#fff);margin-bottom:12px}
 .hero h1{font-size:clamp(30px,4.6vw,50px);line-height:1.05;letter-spacing:-.025em;text-wrap:balance;margin-bottom:12px}
 .meta{display:flex;flex-wrap:wrap;gap:6px 14px;color:var(--mute);font-size:14px;margin-bottom:12px}
 .hero p.d{color:var(--ink2);max-width:58ch;margin-bottom:20px}
@@ -59,7 +59,7 @@ section.s{padding:clamp(26px,4vw,46px) max(4vw,16px);max-width:1340px}
 .th .tt{font-weight:800;font-size:16px;line-height:1.2;max-width:85%;text-wrap:balance;text-shadow:0 1px 10px rgba(0,0,0,.25)}
 .th .seen{position:absolute;left:10px;top:10px;font-size:11px;font-weight:800;background:#fff;color:var(--ok);padding:3px 8px;border-radius:99px;display:none}
 .card.done .seen{display:block}
-.cb{padding:10px 12px 12px;font-size:13px;color:var(--mute)}.cb .pdf{color:var(--red);font-weight:800;font-size:11px;background:#fde8e9;padding:2px 7px;border-radius:5px;margin-left:6px}
+.cb{padding:10px 12px 12px;font-size:13px;color:var(--mute)}.cb .pdf{color:var(--blue);font-weight:800;font-size:11px;background:#dbeafe;padding:2px 7px;border-radius:5px;margin-left:6px}
 /* skill */
 .skillbox{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:20px}
 .how{counter-reset:h;display:grid;gap:10px;align-content:start}
@@ -73,12 +73,12 @@ pre{max-height:440px;overflow:auto;padding:14px;font:12.5px/1.55 'JetBrains Mono
 /* recursos */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
 .res{background:#fff;border:1px solid var(--line);box-shadow:var(--sh);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;position:relative;padding-top:52px}
-.res:before{content:"PDF";position:absolute;left:16px;top:16px;font-size:11px;font-weight:900;color:#fff;background:var(--red);padding:4px 8px;border-radius:6px}
+.res:before{content:"PDF";position:absolute;left:16px;top:16px;font-size:11px;font-weight:900;color:#fff;background:var(--blue);padding:4px 8px;border-radius:6px}
 .res h3{font-size:16px}.res p{font-size:13px;color:var(--mute);flex:1}.res .a{display:flex;gap:8px;flex-wrap:wrap}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0 12px}.tab{min-height:40px;padding:0 16px;border-radius:99px;border:1px solid var(--line);background:#fff;font-size:14px;font-weight:700;color:var(--ink2)}.tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0 12px}.tab{min-height:40px;padding:0 16px;border-radius:99px;border:1px solid var(--line);background:#fff;font-size:14px;font-weight:700;color:var(--ink2)}.tab.on{background:var(--blue);color:#fff;border-color:var(--blue)}
 .pl{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
 .pr{background:#fff;border:1px solid var(--line);box-shadow:var(--sh);border-radius:14px;padding:14px}
-.pr small{color:var(--red);font-weight:800;font-size:11px;letter-spacing:.04em}.pr h4{font-size:15px;margin:2px 0 8px}.pr p{font:12.5px/1.5 'JetBrains Mono',monospace;color:var(--ink2);background:#f1f5f9;border-radius:8px;padding:10px;margin-bottom:8px}
+.pr small{color:var(--blue);font-weight:800;font-size:11px;letter-spacing:.04em}.pr h4{font-size:15px;margin:2px 0 8px}.pr p{font:12.5px/1.5 'JetBrains Mono',monospace;color:var(--ink2);background:#f1f5f9;border-radius:8px;padding:10px;margin-bottom:8px}
 .ck{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
 .cg{background:#fff;border:1px solid var(--line);box-shadow:var(--sh);border-radius:14px;padding:14px}.cg h4{margin-bottom:8px;display:flex;justify-content:space-between}.cg h4 span{color:var(--mute);font-weight:600;font-size:13px}
 .cg label{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--line);font-size:14px;cursor:pointer;color:var(--ink2)}
@@ -89,7 +89,7 @@ pre{max-height:440px;overflow:auto;padding:14px;font:12.5px/1.55 'JetBrains Mono
 .exd{position:relative;padding:0 12% 10% 0;margin-bottom:12px}
 .exd .pc{display:block;width:100%;border-radius:10px;border:6px solid #0f172a;box-shadow:0 20px 40px -24px rgba(15,23,42,.6)}
 .exd .cel{position:absolute;right:0;bottom:0;width:26%;border-radius:14px;border:4px solid #0f172a;box-shadow:0 16px 30px -14px rgba(15,23,42,.6)}
-.ex small{font-size:11px;font-weight:800;color:var(--red)}.ex h3{font-size:17px;margin:2px 0 4px}.ex p{font-size:13.5px;color:var(--mute)}
+.ex small{font-size:11px;font-weight:800;color:var(--blue)}.ex h3{font-size:17px;margin:2px 0 4px}.ex p{font-size:13.5px;color:var(--mute)}
 /* beneficios */
 .ben{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
 .bn{background:#fff;border:1px solid var(--line);box-shadow:var(--sh);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px}
@@ -105,12 +105,12 @@ pre{max-height:440px;overflow:auto;padding:14px;font:12.5px/1.55 'JetBrains Mono
 .player iframe{width:100%;height:100%;border:0}
 .soon{padding:20px;color:#94a3b8}.soon b{display:block;color:#fff;font-size:18px;margin-bottom:4px}
 .mb{padding:20px}.mb h2{font-size:clamp(20px,3vw,28px);margin:6px 0 8px;line-height:1.15}.mb .d{color:var(--ink2);margin-bottom:12px}
-.key{border-left:4px solid var(--red);background:#fff5f5;padding:10px 12px;border-radius:0 10px 10px 0;margin-bottom:14px;font-weight:700;font-size:15px}
+.key{border-left:4px solid var(--blue);background:#eff6ff;padding:10px 12px;border-radius:0 10px 10px 0;margin-bottom:14px;font-weight:700;font-size:15px}
 .mb ol{padding-left:20px;font-size:14px;color:var(--ink2);margin-bottom:14px}.mb ol li{margin-bottom:4px}
 .acts{display:flex;flex-wrap:wrap;gap:8px}
 .vbtn.on{background:#dcfce7;color:var(--ok);border-color:#bbf7d0}
 /* registro */
-.reg{position:fixed;inset:0;z-index:70;background:radial-gradient(700px 400px at 80% 0%,rgba(229,9,20,.12),transparent 70%),radial-gradient(600px 400px at 0% 100%,rgba(59,130,246,.14),transparent 70%),#fbf6ee;display:none;align-items:center;justify-content:center;padding:16px}
+.reg{position:fixed;inset:0;z-index:70;background:radial-gradient(700px 400px at 80% 0%,rgba(234,88,12,.12),transparent 70%),radial-gradient(600px 400px at 0% 100%,rgba(59,130,246,.14),transparent 70%),#fffaf3;display:none;align-items:center;justify-content:center;padding:16px}
 .reg.show{display:flex}
 .regb{width:100%;max-width:440px;background:#fff;border:1px solid var(--line);box-shadow:0 30px 60px -30px rgba(15,23,42,.35);border-radius:20px;padding:26px}
 .regb h2{font-size:24px;margin:10px 0 6px;line-height:1.15}.regb p{color:var(--mute);font-size:14px;margin-bottom:14px}
@@ -119,7 +119,7 @@ pre{max-height:440px;overflow:auto;padding:14px;font:12.5px/1.55 'JetBrains Mono
 .err{color:#dc2626;font-size:13px;min-height:18px;margin:6px 0}
 .toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,30px);opacity:0;background:var(--ink);color:#fff;font-weight:700;padding:10px 16px;border-radius:99px;z-index:90;transition:.25s;font-size:14px}
 .toast.on{opacity:1;transform:translate(-50%,0)}
-footer{padding:30px max(4vw,16px) 40px;color:var(--mute);font-size:13px;border-top:1px solid var(--line);margin-top:20px;background:#fbf6ee}
+footer{padding:30px max(4vw,16px) 40px;color:var(--mute);font-size:13px;border-top:1px solid var(--line);margin-top:20px;background:#fffaf3}
 /* fondos */
 .hero:before{content:"";position:absolute;inset:0;background:url(../media/bg-web.svg) center/1150px auto no-repeat;opacity:.08;pointer-events:none}
 .hero>*{position:relative}
@@ -150,7 +150,7 @@ footer{padding:30px max(4vw,16px) 40px;color:var(--mute);font-size:13px;border-t
       <div class="hbtns"><button class="btn red" id="hPlay">▶ Reproducir</button><a class="btn ghost" href="#skill">Copiar la skill</a></div>
     </div>
     <div class="dash" aria-label="Tu avance">
-      <div class="ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.9" fill="none" stroke="#eef1f6" stroke-width="3.2"/><circle id="ringC" cx="18" cy="18" r="15.9" fill="none" stroke="#e50914" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="0 100" transform="rotate(-90 18 18)"/></svg>
+      <div class="ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.9" fill="none" stroke="#eef1f6" stroke-width="3.2"/><circle id="ringC" cx="18" cy="18" r="15.9" fill="none" stroke="#16a34a" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="0 100" transform="rotate(-90 18 18)"/></svg>
         <div><b id="pct">0%</b><span id="pctT">del curso completado</span></div></div>
       <div class="mbar" id="mbar"></div>
     </div>
@@ -311,7 +311,7 @@ document.addEventListener("keydown", e => { if (e.key === "Escape" && $("#modal"
 $("#mV").onclick = () => { if (ST.done[cur.n]) delete ST.done[cur.n]; else { ST.done[cur.n] = 1; send("clase vista", `${cur.n}. ${cur.title}`); toast("¡Clase completada!"); } save(); vb(); };
 $("#mN").onclick = () => { if (!ST.done[cur.n]) { ST.done[cur.n] = 1; save(); } openC(cur.n + 1); };
 
-$("#rutaL").innerHTML = DATA.ruta.map((r, i) => { const c = ["#3b82f6","#3b82f6","#f59e0b","#f59e0b","#94a3b8","#f59e0b","#22c55e","#22c55e","#e50914"][i];
+$("#rutaL").innerHTML = DATA.ruta.map((r, i) => { const c = ["#3b82f6","#3b82f6","#f59e0b","#f59e0b","#94a3b8","#f59e0b","#22c55e","#22c55e","#ea580c"][i];
   return `<div class="stop" style="--c:${c}"><b>${esc(r.h)}</b><h3>${esc(r.t)}</h3><p>${esc(r.x)}</p></div>`; }).join("");
 $("#skillTxt").textContent = SKILL; $("#cpSkill").onclick = () => copy(SKILL);
 
