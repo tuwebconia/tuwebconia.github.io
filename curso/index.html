@@ -120,6 +120,15 @@ pre{max-height:440px;overflow:auto;padding:14px;font:12.5px/1.55 'JetBrains Mono
 .toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,30px);opacity:0;background:var(--ink);color:#fff;font-weight:700;padding:10px 16px;border-radius:99px;z-index:90;transition:.25s;font-size:14px}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 footer{padding:30px max(4vw,16px) 40px;color:var(--mute);font-size:13px;border-top:1px solid var(--line);margin-top:20px;background:#fff}
+/* fondos */
+.hero:before{content:"";position:absolute;inset:0;background:url(../media/bg-web.svg) center/1150px auto no-repeat;opacity:.08;pointer-events:none}
+.hero>*{position:relative}
+.ph-bg{position:relative;overflow:hidden;max-width:none}
+.ph-bg:before{content:"";position:absolute;inset:0;background:var(--img) center/cover no-repeat;opacity:.07;filter:grayscale(.3) blur(5px);transform:scale(1.05);pointer-events:none}
+.ph-bg>*{position:relative}
+.ph-bg>.sh,.ph-bg>div{max-width:1340px}
+.reg:after{content:"";position:absolute;inset:0;background:url(../media/bg-web.svg) center/1100px auto no-repeat;opacity:.08;pointer-events:none}
+.regb{position:relative;z-index:1}
 @media(max-width:860px){.hgrid,.skillbox{grid-template-columns:minmax(0,1fr)}.links{display:none}.logo{font-size:15px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
@@ -148,12 +157,12 @@ footer{padding:30px max(4vw,16px) 40px;color:var(--mute);font-size:13px;border-t
   </div>
 </header>
 
-<section class="s" id="ruta">
+<section class="s ph-bg" id="ruta" style="--img:url(../media/sistema_pc.webp)">
   <div class="sh"><h2>Tu mapa de ruta del día</h2><span>De 08:00 a 15:30 · o en dos medias jornadas</span></div>
   <div class="ruta" id="rutaL"></div>
 </section>
 
-<section class="s" id="clases">
+<section class="s ph-bg" id="clases" style="--img:url(../media/grow_pc.webp)">
   <div class="sh"><h2>Las clases</h2><span id="clT"></span></div>
   <div id="rows"></div>
 </section>
@@ -163,7 +172,7 @@ footer{padding:30px max(4vw,16px) 40px;color:var(--mute);font-size:13px;border-t
   <div class="exg" id="exG"></div>
 </section>
 
-<section class="s" id="skill">
+<section class="s ph-bg" id="skill" style="--img:url(../media/landing_pc.webp)">
   <div class="sh"><h2>La skill “Creador de Webs”</h2><span>Tu diseñador web dentro de Claude</span></div>
   <div class="skillbox">
     <ol class="how">
@@ -180,14 +189,14 @@ footer{padding:30px max(4vw,16px) 40px;color:var(--mute);font-size:13px;border-t
   </div>
 </section>
 
-<section class="s" id="recursos">
+<section class="s ph-bg" id="recursos" style="--img:url(../media/catalogo_pc.webp)">
   <div class="sh"><h2>Recursos y bonos</h2><span>Descargables en PDF</span></div>
   <div class="grid" id="resG"></div>
   <div class="tabs" role="tablist"><button class="tab on" data-t="prompts">Banco de prompts</button><button class="tab" data-t="check">Checklist interactivo</button></div>
   <div id="tabP"></div>
 </section>
 
-<section class="s" id="beneficios">
+<section class="s ph-bg" id="beneficios" style="--img:url(../media/grow_pc.webp)">
   <div class="sh"><h2>Mis beneficios</h2><span>Incluidos con tu compra</span></div>
   <div class="ben">
     <div class="bn"><h3>Soporte por WhatsApp · 7 días</h3><div class="big" id="supD"></div><p id="supT">Escribime cuando te trabes. Te respondo personalmente.</p><a class="btn red" id="supB" target="_blank" rel="noopener">Escribir a soporte</a></div>
