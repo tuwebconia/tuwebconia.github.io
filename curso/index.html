@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tu Web con IA en un Día · Plataforma</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307080c'/%3E%3Ctext x='32' y='45' font-family='Arial' font-weight='900' font-size='34' text-anchor='middle' fill='%23e50914'%3EW%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: plataforma de alumno, cálida y enfocada, gemela de GROW Academy en versión clara
+   IDEA: un "streaming" de clases + la mesa de trabajo del día (ruta, skill, recursos)
+   PICTURE: portada con la próxima clase y el anillo de avance del día
+   COLOUR and TYPE: blanco y gris niebla, tinta azul noche, rojo GROW para acciones, color por módulo en las miniaturas; Inter
+   LAYOUT: nav fija, portada, ruta, filas por módulo, skill, recursos, beneficios */
+:root{--bg:#f6f7fb;--bg2:#ffffff;--card:#ffffff;--line:#e6e9f0;--ink:#0f172a;--ink2:#334155;--mute:#64748b;--red:#e50914;--ok:#16a34a;--sh:0 1px 2px rgba(15,23,42,.05),0 12px 30px -16px rgba(15,23,42,.2)}
+*{box-sizing:border-box;min-width:0;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
+button,input{font:inherit;color:inherit}button{background:none;border:0;cursor:pointer}a{color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:6px}
+.nav{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:22px;padding:14px max(4vw,16px);background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.logo{font-weight:900;letter-spacing:.03em;font-size:19px;white-space:nowrap;text-decoration:none;color:var(--ink)}.logo b{color:var(--red)}
+.links{display:flex;gap:18px;font-size:14px;color:var(--ink2);overflow-x:auto;scrollbar-width:none}.links a{text-decoration:none;white-space:nowrap}.links a:hover{color:var(--red)}
+.who{margin-left:auto;font-size:13px;color:var(--mute);white-space:nowrap}.who b{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:10px;font-weight:800;font-size:15px;text-decoration:none;transition:transform .15s,box-shadow .2s}
+.btn:active{transform:scale(.97)}.btn.red{background:var(--red);color:#fff;box-shadow:0 10px 24px -12px rgba(229,9,20,.7)}.btn.ghost{background:#fff;border:1px solid var(--line);color:var(--ink)}.btn.sm{min-height:38px;padding:0 14px;font-size:13px}
+/* hero */
+.hero{position:relative;padding:clamp(34px,6vw,70px) max(4vw,16px) 34px;background:radial-gradient(800px 420px at 90% 0%,color-mix(in srgb,var(--hc) 18%,transparent),transparent 70%),radial-gradient(600px 360px at 0% 100%,rgba(250,204,21,.12),transparent 70%),#fff;border-bottom:1px solid var(--line)}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(20px,4vw,48px);align-items:center;max-width:1240px}
+.tag{display:inline-block;font-size:12px;font-weight:800;padding:5px 11px;border-radius:99px;background:color-mix(in srgb,var(--hc,#e50914) 12%,#fff);color:color-mix(in srgb,var(--hc,#e50914) 80%,#000);border:1px solid color-mix(in srgb,var(--hc,#e50914) 30%,#fff);margin-bottom:12px}
+.hero h1{font-size:clamp(30px,4.6vw,50px);line-height:1.05;letter-spacing:-.025em;text-wrap:balance;margin-bottom:12px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 14px;color:var(--mute);font-size:14px;margin-bottom:12px}
+.hero p.d{color:var(--ink2);max-width:58ch;margin-bottom:20px}
+.hbtns{display:flex;flex-wrap:wrap;gap:10px}
+.dash{background:#fff;border:1px solid var(--line);box-shadow:var(--sh);border-radius:18px;padding:20px}
+.ring{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.ring svg{width:92px;height:92px;flex:none}.ring b{font-size:30px;line-height:1}.ring span{display:block;color:var(--mute);font-size:13px}
+.mbar{display:grid;gap:9px}.mbar div{font-size:13px;color:var(--ink2)}.mbar .t{display:flex;justify-content:space-between;margin-bottom:4px}
+.track{height:7px;background:#eef1f6;border-radius:9px;overflow:hidden}.track i{display:block;height:100%;border-radius:9px}
+/* sections */
+section.s{padding:clamp(26px,4vw,46px) max(4vw,16px);max-width:1340px}
+.sh{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.sh h2{font-size:clamp(22px,2.6vw,30px);letter-spacing:-.015em}.sh span{color:var(--mute);font-size:14px}
+/* ruta */
+.ruta{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 12px}
+.stop{flex:0 0 210px;scroll-snap-align:start;background:#fff;border:1px solid var(--line);box-shadow:var(--sh);border-top:4px solid var(--c);border-radius:14px;padding:12px 14px}
+.stop b{font-size:20px;display:block}.stop small{color:var(--mute);font-size:12px}.stop h3{font-size:15px;margin:6px 0 4px}.stop p{font-size:13px;color:var(--ink2)}
+/* rows */
+.row{margin-bottom:26px}.row h3.rt{display:flex;align-items:center;gap:10px;font-size:18px;margin-bottom:10px;flex-wrap:wrap}.row h3.rt i{width:10px;height:10px;border-radius:50%;background:var(--mc)}
+.row h3.rt span{font-weight:600;color:var(--mute);font-size:13px}
+.scroller{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(250px,300px);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 12px;scrollbar-width:thin}
+.card{scroll-snap-align:start;text-align:left;background:#fff;border:1px solid var(--line);box-shadow:var(--sh);border-radius:14px;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-4px);box-shadow:0 22px 40px -20px rgba(15,23,42,.35)}
+.th{position:relative;aspect-ratio:16/9;background:radial-gradient(120% 110% at 100% 0%,color-mix(in srgb,var(--mc) 55%,#fff),var(--mc) 55%,color-mix(in srgb,var(--mc) 70%,#0f172a));display:flex;align-items:flex-end;padding:12px;color:#fff}
+.th .n{position:absolute;right:12px;top:4px;font-size:70px;font-weight:900;line-height:1;color:rgba(255,255,255,.28)}
+.th .tt{font-weight:800;font-size:16px;line-height:1.2;max-width:85%;text-wrap:balance;text-shadow:0 1px 10px rgba(0,0,0,.25)}
+.th .seen{position:absolute;left:10px;top:10px;font-size:11px;font-weight:800;background:#fff;color:var(--ok);padding:3px 8px;border-radius:99px;display:none}
+.card.done .seen{display:block}
+.cb{padding:10px 12px 12px;font-size:13px;color:var(--mute)}.cb .pdf{color:var(--red);font-weight:800;font-size:11px;background:#fde8e9;padding:2px 7px;border-radius:5px;margin-left:6px}
+/* skill */
+.skillbox{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:20px}
+.how{counter-reset:h;display:grid;gap:10px;align-content:start}
+.how li{list-style:none;counter-increment:h;position:relative;background:#fff;border:1px solid var(--line);box-shadow:var(--sh);border-radius:14px;padding:12px 14px 12px 52px;font-size:14px;color:var(--ink2)}
+.how li:before{content:counter(h);position:absolute;left:14px;top:12px;width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.how li b{display:block;font-size:15px;color:var(--ink)}
+.code{background:#0f172a;border-radius:16px;overflow:hidden;box-shadow:0 24px 50px -24px rgba(15,23,42,.6)}
+.codeh{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.1);font-size:13px;color:#94a3b8;flex-wrap:wrap}
+.code .btn.ghost{background:rgba(255,255,255,.1);border-color:transparent;color:#fff}
+pre{max-height:440px;overflow:auto;padding:14px;font:12.5px/1.55 'JetBrains Mono',monospace;color:#e2e8f0;white-space:pre-wrap;word-break:break-word}
+/* recursos */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.res{background:#fff;border:1px solid var(--line);box-shadow:var(--sh);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;position:relative;padding-top:52px}
+.res:before{content:"PDF";position:absolute;left:16px;top:16px;font-size:11px;font-weight:900;color:#fff;background:var(--red);padding:4px 8px;border-radius:6px}
+.res h3{font-size:16px}.res p{font-size:13px;color:var(--mute);flex:1}.res .a{display:flex;gap:8px;flex-wrap:wrap}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0 12px}.tab{min-height:40px;padding:0 16px;border-radius:99px;border:1px solid var(--line);background:#fff;font-size:14px;font-weight:700;color:var(--ink2)}.tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.pl{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.pr{background:#fff;border:1px solid var(--line);box-shadow:var(--sh);border-radius:14px;padding:14px}
+.pr small{color:var(--red);font-weight:800;font-size:11px;letter-spacing:.04em}.pr h4{font-size:15px;margin:2px 0 8px}.pr p{font:12.5px/1.5 'JetBrains Mono',monospace;color:var(--ink2);background:#f1f5f9;border-radius:8px;padding:10px;margin-bottom:8px}
+.ck{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.cg{background:#fff;border:1px solid var(--line);box-shadow:var(--sh);border-radius:14px;padding:14px}.cg h4{margin-bottom:8px;display:flex;justify-content:space-between}.cg h4 span{color:var(--mute);font-weight:600;font-size:13px}
+.cg label{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--line);font-size:14px;cursor:pointer;color:var(--ink2)}
+.cg input{width:20px;height:20px;accent-color:var(--ok);flex:none;margin-top:1px}
+/* beneficios */
+.ben{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.bn{background:#fff;border:1px solid var(--line);box-shadow:var(--sh);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.bn h3{font-size:17px}.bn p{font-size:14px;color:var(--ink2);flex:1}
+.bn input{width:100%;min-height:44px;border-radius:10px;border:1px solid var(--line);background:#f8fafc;padding:0 12px;font-size:16px}
+.big{font-size:28px;font-weight:900;color:var(--ok)}
+/* modal */
+.modal{position:fixed;inset:0;z-index:60;background:rgba(15,23,42,.55);backdrop-filter:blur(4px);display:none;overflow-y:auto;padding:4vh 12px}
+.modal.show{display:block}
+.sheet{max-width:900px;margin:0 auto;background:#fff;border-radius:18px;overflow:hidden;position:relative;box-shadow:0 40px 80px -20px rgba(15,23,42,.5)}
+.close{position:absolute;right:10px;top:10px;z-index:2;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.92);color:var(--ink);font-size:18px;box-shadow:var(--sh)}
+.player{aspect-ratio:16/9;background:#0f172a;display:flex;align-items:center;justify-content:center;text-align:center}
+.player iframe{width:100%;height:100%;border:0}
+.soon{padding:20px;color:#94a3b8}.soon b{display:block;color:#fff;font-size:18px;margin-bottom:4px}
+.mb{padding:20px}.mb h2{font-size:clamp(20px,3vw,28px);margin:6px 0 8px;line-height:1.15}.mb .d{color:var(--ink2);margin-bottom:12px}
+.key{border-left:4px solid var(--red);background:#fff5f5;padding:10px 12px;border-radius:0 10px 10px 0;margin-bottom:14px;font-weight:700;font-size:15px}
+.mb ol{padding-left:20px;font-size:14px;color:var(--ink2);margin-bottom:14px}.mb ol li{margin-bottom:4px}
+.acts{display:flex;flex-wrap:wrap;gap:8px}
+.vbtn.on{background:#dcfce7;color:var(--ok);border-color:#bbf7d0}
+/* registro */
+.reg{position:fixed;inset:0;z-index:70;background:radial-gradient(700px 400px at 80% 0%,rgba(229,9,20,.12),transparent 70%),radial-gradient(600px 400px at 0% 100%,rgba(59,130,246,.14),transparent 70%),#f6f7fb;display:none;align-items:center;justify-content:center;padding:16px}
+.reg.show{display:flex}
+.regb{width:100%;max-width:440px;background:#fff;border:1px solid var(--line);box-shadow:0 30px 60px -30px rgba(15,23,42,.35);border-radius:20px;padding:26px}
+.regb h2{font-size:24px;margin:10px 0 6px;line-height:1.15}.regb p{color:var(--mute);font-size:14px;margin-bottom:14px}
+.regb label{display:block;font-size:13px;font-weight:700;margin:10px 0 4px}
+.regb input{width:100%;min-height:46px;border-radius:10px;border:1px solid var(--line);background:#f8fafc;padding:0 12px;font-size:16px}
+.err{color:#dc2626;font-size:13px;min-height:18px;margin:6px 0}
+.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,30px);opacity:0;background:var(--ink);color:#fff;font-weight:700;padding:10px 16px;border-radius:99px;z-index:90;transition:.25s;font-size:14px}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+footer{padding:30px max(4vw,16px) 40px;color:var(--mute);font-size:13px;border-top:1px solid var(--line);margin-top:20px;background:#fff}
+@media(max-width:860px){.hgrid,.skillbox{grid-template-columns:minmax(0,1fr)}.links{display:none}.logo{font-size:15px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="logo" href="#inicio">TU WEB CON IA <b>EN UN DÍA</b></a>
+  <div class="links"><a href="#ruta">Mapa de ruta</a><a href="#clases">Clases</a><a href="#skill">La skill</a><a href="#recursos">Recursos</a><a href="#beneficios">Mis beneficios</a></div>
+  <div class="who" id="who"></div>
+</nav>
+
+<header class="hero" id="inicio">
+  <div class="hgrid">
+    <div>
+      <span class="tag" id="hTag">Empezá por acá</span>
+      <h1 id="hTitle">Bienvenida</h1>
+      <div class="meta"><span id="hEp"></span><span id="hMod"></span></div>
+      <p class="d" id="hDesc"></p>
+      <div class="hbtns"><button class="btn red" id="hPlay">▶ Reproducir</button><a class="btn ghost" href="#skill">Copiar la skill</a></div>
+    </div>
+    <div class="dash" aria-label="Tu avance">
+      <div class="ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.9" fill="none" stroke="#eef1f6" stroke-width="3.2"/><circle id="ringC" cx="18" cy="18" r="15.9" fill="none" stroke="#e50914" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="0 100" transform="rotate(-90 18 18)"/></svg>
+        <div><b id="pct">0%</b><span id="pctT">del curso completado</span></div></div>
+      <div class="mbar" id="mbar"></div>
+    </div>
+  </div>
+</header>
+
+<section class="s" id="ruta">
+  <div class="sh"><h2>Tu mapa de ruta del día</h2><span>De 08:00 a 17:00 · o en dos medias jornadas</span></div>
+  <div class="ruta" id="rutaL"></div>
+</section>
+
+<section class="s" id="clases">
+  <div class="sh"><h2>Las clases</h2><span id="clT"></span></div>
+  <div id="rows"></div>
+</section>
+
+<section class="s" id="skill">
+  <div class="sh"><h2>La skill “Creador de Webs”</h2><span>Tu diseñador web dentro de Claude</span></div>
+  <div class="skillbox">
+    <ol class="how">
+      <li><b>Activá la creación de archivos</b>En Claude: Configuración › Capacidades › creación y edición de archivos (ejecución de código).</li>
+      <li><b>Descargá el ZIP</b>Tocá “Descargar ZIP de la skill”. No lo descomprimas.</li>
+      <li><b>Subila a Claude</b>Personalizar › Skills › “+” › “Crear skill” › “Subir una skill” y elegí el ZIP.</li>
+      <li><b>Usala</b>En un chat nuevo escribí: “Quiero crear la web de mi negocio con la skill Creador de Webs”.</li>
+      <li><b>Plan B: copiar y pegar</b>Creá un Proyecto en Claude, tocá “Instrucciones” y pegá el texto completo de la skill. Todo chat dentro de ese proyecto la va a usar.</li>
+    </ol>
+    <div class="code">
+      <div class="codeh"><span>SKILL.md · lista para copiar</span><span style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn red sm" id="cpSkill">Copiar skill</button><a class="btn ghost sm" href="../recursos/creador-de-webs.zip" download>Descargar ZIP de la skill</a></span></div>
+      <pre id="skillTxt"></pre>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="recursos">
+  <div class="sh"><h2>Recursos y bonos</h2><span>Descargables en PDF</span></div>
+  <div class="grid" id="resG"></div>
+  <div class="tabs" role="tablist"><button class="tab on" data-t="prompts">Banco de prompts</button><button class="tab" data-t="check">Checklist interactivo</button></div>
+  <div id="tabP"></div>
+</section>
+
+<section class="s" id="beneficios">
+  <div class="sh"><h2>Mis beneficios</h2><span>Incluidos con tu compra</span></div>
+  <div class="ben">
+    <div class="bn"><h3>Soporte por WhatsApp · 7 días</h3><div class="big" id="supD"></div><p id="supT">Escribime cuando te trabes. Te respondo personalmente.</p><a class="btn red" id="supB" target="_blank" rel="noopener">Escribir a soporte</a></div>
+    <div class="bn"><h3>Sesión en vivo de 1 hora</h3><p>Feedback y dudas por videollamada. Agendala cuando tengas tu primera versión, así la aprovechamos al máximo.</p><a class="btn red" id="liveB" target="_blank" rel="noopener">Agendar mi sesión</a></div>
+    <div class="bn"><h3>Revisión de tu web</h3><p>Pegá el link de tu web publicada y te devuelvo mis sugerencias en un audio o video.</p><input id="revL" type="url" inputmode="url" placeholder="https://tuusuario.github.io"><a class="btn red" id="revB" target="_blank" rel="noopener">Enviar a revisión</a></div>
+    <div class="bn"><h3>Garantía de 7 días</h3><p>Si seguís las clases y no lográs publicar tu web, escribime dentro de los 7 días de tu compra y te devuelvo el 100% de tu dinero.</p><a class="btn ghost" id="garB" target="_blank" rel="noopener">Consultar la garantía</a></div>
+  </div>
+</section>
+
+<footer>Tu Web con IA en un Día · por Jesús Ibarra · GROW Academy · WhatsApp 0986 809 911 · © 2026</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mT">
+  <div class="sheet">
+    <button class="close" id="mX" aria-label="Cerrar">✕</button>
+    <div class="player" id="player"></div>
+    <div class="mb">
+      <span class="tag" id="mTag"></span>
+      <h2 id="mT"></h2>
+      <p class="d" id="mD"></p>
+      <div class="key" id="mK"></div>
+      <ol id="mP"></ol>
+      <div class="acts"><button class="btn ghost vbtn" id="mV">✓ Marcar como vista</button><a class="btn ghost" id="mPdf" target="_blank" rel="noopener">Ver guía PDF</a><button class="btn red" id="mN">Siguiente clase →</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="reg" id="reg"><form class="regb" id="regF" autocomplete="on">
+  <a class="logo">TU WEB CON IA <b>EN UN DÍA</b></a>
+  <h2>Bienvenido. Hoy tu negocio tiene web.</h2>
+  <p>Ingresá tus datos para guardar tu avance y activar tu soporte de 7 días.</p>
+  <label for="rN">Nombre</label><input id="rN" autocomplete="given-name" required placeholder="Ej.: María">
+  <label for="rA">Apellido</label><input id="rA" autocomplete="family-name" required placeholder="Ej.: González">
+  <label for="rW">WhatsApp</label><input id="rW" type="tel" autocomplete="tel" required placeholder="Ej.: 0981 123 456">
+  <div class="err" id="rE"></div>
+  <button class="btn red" type="submit" style="width:100%">Empezar ahora →</button>
+</form></div>
+<div class="toast" id="toast"></div>
+
+<script>
+{
+/* ============ EDITÁ ACÁ ============
+   VIDEO: pegá el ID de tu video de YouTube (no listado). Ej.: de https://youtu.be/AbC123xyz el ID es AbC123xyz
+   Si grabás un solo video largo, completá en CORTES el segundo de inicio y fin de cada clase.
+   Si subís un video por clase, poné el ID en CORTES como {id:"..."} */
+const VIDEO_ID = "";
+const CORTES = {1:[0,0],2:[0,0],3:[0,0],4:[0,0],5:[0,0],6:[0,0],7:[0,0],8:[0,0]};
+const WA_NUM = "595986809911";
+const API = ""; // opcional: URL de tu Apps Script para ver el avance de alumnos en una planilla
+/* =================================== */
+const DATA = {"curso": "Tu Web con IA en un Día", "mods": [{"n": 1, "name": "Preparar", "full": "Preparar: elegí tu web y activá Claude", "color": "#3b82f6", "hora": "Mañana", "desc": "Definís qué web necesita tu negocio, creás tu cuenta y activás la skill."}, {"n": 2, "name": "Construir", "full": "Construir: tu web con la skill", "color": "#f59e0b", "hora": "Mediodía", "desc": "Juntás tu material, Claude arma la primera versión y la dejás a tu gusto."}, {"n": 3, "name": "Publicar", "full": "Publicar: tu link en internet", "color": "#22c55e", "hora": "Tarde", "desc": "La subís gratis con tu propio link y empezás a compartirla ese mismo día."}], "classes": [{"n": 1, "mod": 1, "title": "Bienvenida: tu web en un día", "desc": "Qué vas a tener al final del día, ejemplos reales de webs hechas con Claude y cómo aprovechar el curso.", "idea": "No necesitás saber programar: necesitás saber qué querés que haga tu web.", "pasos": ["Mirá los ejemplos: landing de venta, catálogo y plataforma de capacitación.", "Bloqueá en tu agenda un día (o dos medias jornadas) para hacer tu web.", "Abrí el Mapa de ruta y tenelo a mano todo el día."], "ejercicio": "Escribí en una frase qué querés que pase cuando alguien entre a tu web. Ej.: \"Que me escriba por WhatsApp para pedir un presupuesto\".", "check": ["Tengo un día reservado para hacer mi web", "Descargué el Mapa de ruta", "Escribí mi frase objetivo"]}, {"n": 2, "mod": 1, "title": "Elegí tu tipo de web", "desc": "Los 5 modelos que resuelven el 90% de los negocios: landing de venta, catálogo, capacitación interna, marca personal e inscripción a eventos.", "idea": "Una web con un solo objetivo vende más que una web que quiere hacer todo.", "pasos": ["Repasá los 5 modelos: A vender, B catálogo, C capacitar, D marca personal, E inscripciones.", "Elegí UNO para empezar. Los demás los hacés después con la misma skill.", "Anotá qué acción final querés: WhatsApp, pago, inscripción o ver clases."], "ejercicio": "Marcá tu modelo y escribí 3 dolores de tu cliente con sus palabras.", "check": ["Elegí mi modelo (A, B, C, D o E)", "Sé cuál es la acción final", "Tengo 3 dolores de mi cliente escritos"]}, {"n": 3, "mod": 1, "title": "Tu cuenta de Claude y la skill", "desc": "Creás tu cuenta, elegís el plan, activás la creación de archivos y cargás la skill Creador de Webs paso a paso.", "idea": "La skill es como contratar a un diseñador web que ya sabe exactamente qué preguntarte.", "pasos": ["Entrá a claude.ai, creá tu cuenta y elegí el plan Pro (mensual o anual).", "En Configuración › Capacidades activá la creación y edición de archivos (ejecución de código).", "Descargá el ZIP de la skill desde la plataforma.", "En Personalizar › Skills tocá \"+\", luego \"Crear skill\" › \"Subir una skill\" y elegí el ZIP.", "Plan B: si no te aparece, creá un Proyecto y pegá el texto de la skill en sus instrucciones."], "ejercicio": "Escribile a Claude: \"Quiero crear la web de mi negocio\" y confirmá que te hace las preguntas de la entrevista.", "check": ["Tengo cuenta y plan Pro", "Activé la creación de archivos", "La skill está cargada y activada", "Claude me hizo las preguntas de la entrevista"]}, {"n": 4, "mod": 2, "title": "Juntá tu material", "desc": "Qué preparar antes de construir: textos, precios, fotos, logo, colores, videos y testimonios reales. Cómo achicar fotos para que la web cargue rápido.", "idea": "La calidad de tu web depende de la calidad de lo que le das a Claude.", "pasos": ["Armá una carpeta en tu compu con todo: logo, fotos, lista de productos o clases.", "Pasá tus precios y productos a una lista o planilla (nombre, precio, descripción, categoría).", "Si es capacitación: subí tus videos a YouTube como \"No listado\" o a Vimeo y copiá los links.", "Achicá tus fotos (squoosh.app o tinypng.com) para que pesen menos de 300 KB."], "ejercicio": "Completá la Plantilla de contenido con los datos de tu negocio.", "check": ["Tengo logo y colores", "Tengo fotos optimizadas", "Tengo mi lista de productos, servicios o clases", "Tengo mi WhatsApp con código de país"]}, {"n": 5, "mod": 2, "title": "Tu primera versión con la skill", "desc": "En vivo: respondemos la entrevista de la skill, subimos el material y Claude arma la web completa. Cómo leer la vista previa.", "idea": "La primera versión no tiene que ser perfecta: tiene que existir.", "pasos": ["Abrí un chat nuevo y escribí: \"Quiero crear mi web con la skill Creador de Webs\".", "Respondé las 8 preguntas en un solo mensaje y adjuntá tus fotos y tu lista.", "Esperá la primera versión y abrila en la vista previa.", "Mirala en tamaño celular antes que en compu."], "ejercicio": "Generá tu primera versión y anotá 5 cosas que querés cambiar.", "check": ["Tengo mi primera versión", "La vi en tamaño celular", "Anoté mis cambios"]}, {"n": 6, "mod": 2, "title": "Ajustes: que se vea profesional", "desc": "Cómo pedir cambios sin romper nada: textos que venden, colores, fotos, orden de secciones, botón de WhatsApp y vista en el celular.", "idea": "Pedí un cambio por mensaje y decí exactamente qué querés y dónde.", "pasos": ["Pedí los cambios de a uno o de a pocos, con la sección exacta (ej.: \"en la portada…\").", "Usá el Banco de prompts para mejorar textos, títulos y llamados a la acción.", "Probá cada botón de WhatsApp desde tu celular.", "Cuando esté lista, pedí: \"Entregame los archivos en un ZIP\"."], "ejercicio": "Pasá tu web por el Checklist de calidad y corregí todo lo que falte.", "check": ["Los textos hablan del dolor de mi cliente", "Los botones de WhatsApp funcionan", "Se ve bien en celular", "Descargué el ZIP con mi web"]}, {"n": 7, "mod": 3, "title": "Publicá tu web con tu link", "desc": "Paso a paso en GitHub Pages: crear cuenta, crear el repositorio, subir los archivos y activar tu link gratis. Alternativa rápida con Netlify Drop.", "idea": "Una web que no está publicada no le vende a nadie.", "pasos": ["Creá tu cuenta gratis en github.com (tu usuario va a ser parte del link).", "Creá un repositorio llamado tuusuario.github.io, público.", "Subí index.html y la carpeta media con \"uploading an existing file\".", "Revisá Settings › Pages (rama main, carpeta raíz) y esperá 1 o 2 minutos.", "Abrí tu link desde otro teléfono para confirmar."], "ejercicio": "Publicá tu web y mandale el link a 3 personas de confianza para que te den su opinión.", "check": ["Tengo cuenta de GitHub", "Mi web está publicada", "El link funciona desde otro teléfono"]}, {"n": 8, "mod": 3, "title": "Errores comunes y próximos pasos", "desc": "Qué hacer si Claude se equivoca o se te acaba el uso, cómo actualizar tu web después y cómo empezar a traer visitas ese mismo día.", "idea": "Tu web empieza a trabajar el día que la compartís, no el día que la terminás.", "pasos": ["Si algo se rompe: pedile a Claude \"volvé a la versión anterior de [sección]\".", "Si se acaba tu uso: esperá el reinicio o seguí en un chat nuevo pegando tu index.html.", "Para actualizar: editá index.html en GitHub y tocá Commit changes.", "Poné tu link en la bio de Instagram, tu estado de WhatsApp y Google Maps.", "Agendá tu sesión en vivo y mandame tu link para la revisión."], "ejercicio": "Compartí tu link hoy en tu estado de WhatsApp y en tu bio de Instagram.", "check": ["Mi link está en mi bio y mi estado", "Agendé mi sesión en vivo", "Envié mi web a revisión"]}], "prompts": [{"cat": "Arrancar", "t": "Empezar con la skill", "p": "Quiero crear la web de mi negocio con la skill Creador de Webs. Haceme las preguntas de la entrevista."}, {"cat": "Arrancar", "t": "Sin skill (en un Proyecto)", "p": "Actuá como diseñador web experto en negocios pequeños. Voy a darte la información de mi negocio y quiero que me armes una web completa en un solo archivo index.html, pensada primero para celular, con botón de WhatsApp. Antes de empezar, haceme las preguntas que necesites en un solo mensaje."}, {"cat": "Textos", "t": "Promesa de la portada", "p": "Reescribí el título de la portada en una sola frase que diga qué logra mi cliente y en cuánto tiempo. Dame 5 opciones, cortas, sin exagerar."}, {"cat": "Textos", "t": "Dolores del cliente", "p": "Mi cliente ideal es [describilo]. Escribí 5 situaciones que vive hoy, contadas como él las diría, para la sección \"¿Te pasa esto?\"."}, {"cat": "Textos", "t": "Llamados a la acción", "p": "Dame 5 textos para el botón principal que inviten a escribir por WhatsApp. Máximo 5 palabras cada uno."}, {"cat": "Textos", "t": "Preguntas frecuentes", "p": "Escribí las 7 preguntas que más me haría un cliente antes de comprar [producto] y respondelas en 2 frases cada una, con la información que ya te di. Si falta un dato, marcalo."}, {"cat": "Diseño", "t": "Cambiar colores", "p": "Cambiá la paleta de la web a estos colores: [color principal], [color de apoyo] y [color de los botones]. Mantené buen contraste para que se lea bien."}, {"cat": "Diseño", "t": "Más profesional", "p": "Hacé que la web se vea más profesional y premium sin cambiar los textos: más aire entre secciones, tipografía más elegante y fotos más grandes."}, {"cat": "Diseño", "t": "Revisar en celular", "p": "Revisá la web como si la abrieras en un celular de 360 px de ancho. Corregí todo lo que se corte, se salga de la pantalla o sea difícil de tocar."}, {"cat": "Catálogo", "t": "Cargar productos desde planilla", "p": "Te paso mi lista de productos. Cargala en el catálogo con nombre, precio, descripción, categoría y foto. Ordená por categoría y agregá el botón \"Consultar por WhatsApp\" en cada producto."}, {"cat": "Capacitación", "t": "Cargar clases de un video largo", "p": "Mi video de capacitación está en este link: [link]. Las clases empiezan en estos minutos: [lista]. Dividilo en clases dentro de la plataforma, con título y descripción para cada una."}, {"cat": "Capacitación", "t": "Cuestionario por módulo", "p": "Armá un cuestionario de 5 preguntas de opción múltiple para el módulo [nombre], basado en estos temas: [temas]. Que se apruebe con 4 de 5."}, {"cat": "Publicar", "t": "Entregar archivos", "p": "Ya está lista. Entregame el index.html y la carpeta media en un ZIP llamado mi-web.zip, y explicame paso a paso cómo publicarla en GitHub Pages."}, {"cat": "Publicar", "t": "Vista previa al compartir", "p": "Agregá título, descripción e imagen para que cuando comparta el link por WhatsApp se vea una vista previa linda."}, {"cat": "Arreglar", "t": "Algo se rompió", "p": "Después del último cambio [describí qué pasa]. Arreglalo sin cambiar nada más de la web."}], "checklist": [{"g": "Antes de empezar", "items": ["Elegí un solo objetivo para mi web", "Elegí mi modelo (A, B, C, D o E)", "Tengo cuenta de Claude con plan Pro", "Activé la creación de archivos", "Cargué la skill Creador de Webs"]}, {"g": "Material", "items": ["Logo y colores de mi marca", "Fotos propias, achicadas a menos de 300 KB", "Lista de productos, servicios o clases con precios", "WhatsApp con código de país (ej.: 595 981 …)", "Testimonios reales (si tengo)", "Videos en YouTube no listado o Vimeo (si es capacitación)"]}, {"g": "Calidad", "items": ["La portada dice qué logra el cliente en una frase", "Hay una sección con los dolores del cliente", "El precio y lo que incluye se entienden rápido", "Todos los botones de WhatsApp funcionan con el mensaje escrito", "Se ve bien en celular, nada se corta", "No hay datos inventados ni textos de relleno"]}, {"g": "Publicación", "items": ["Descargué mi web en ZIP", "Creé mi cuenta de GitHub", "Subí index.html y la carpeta media", "Activé GitHub Pages", "Probé el link desde otro teléfono", "La vista previa del link se ve bien en WhatsApp"]}, {"g": "Después de publicar", "items": ["Puse el link en mi bio de Instagram", "Lo compartí en mi estado de WhatsApp", "Lo agregué a mi perfil de Google Maps", "Agendé mi sesión en vivo", "Envié mi web a revisión"]}], "ruta": [{"h": "08:00", "d": "30 min", "t": "Arranque", "x": "Mirás las clases 1 y 2. Elegís tu modelo de web y escribís tu objetivo y los dolores de tu cliente."}, {"h": "08:30", "d": "30 min", "t": "Claude listo", "x": "Clase 3: cuenta, plan Pro, creación de archivos y la skill cargada."}, {"h": "09:00", "d": "1 h 30", "t": "Material", "x": "Clase 4: juntás logo, fotos, precios, productos o videos en una carpeta. Completás la plantilla de contenido."}, {"h": "10:30", "d": "1 h", "t": "Primera versión", "x": "Clase 5: respondés la entrevista de la skill y Claude arma tu web completa."}, {"h": "11:30", "d": "1 h 30", "t": "Almuerzo y pausa", "x": "Te alejás de la pantalla. Volvés con ojos frescos."}, {"h": "13:00", "d": "2 h", "t": "Ajustes", "x": "Clase 6: textos, colores, fotos y WhatsApp. Pasás el checklist de calidad."}, {"h": "15:00", "d": "1 h", "t": "Publicación", "x": "Clase 7: GitHub Pages y tu link funcionando."}, {"h": "16:00", "d": "1 h", "t": "A trabajar", "x": "Clase 8: compartís tu link, agendás tu sesión en vivo y mandás tu web a revisión."}, {"h": "17:00", "d": "✓", "t": "Tu web está online", "x": "Tu negocio ya tiene web propia, con tu link, trabajando para vos."}]};
+const SKILL = "---\nname: creador-de-webs\ndescription: Crear la web de un negocio en un día — landing de venta, catálogo de productos o servicios, o plataforma de capacitación estilo Netflix — y publicarla con link propio.\n---\n\n# Creador de webs para emprendedores y MIPYMES\n\nSos el asistente que le arma a un emprendedor su página web completa, lista para usar y publicar, en una sola jornada. La persona no sabe programar: vos hacés todo el código, ella pone la información de su negocio.\n\nHablale en español, de vos, claro y directo. Nada de jerga técnica sin explicarla. Cada paso que le pidas hacer a la persona, explicalo como a alguien que nunca abrió un código.\n\n## Paso 1 · Entrevista corta (antes de escribir una sola línea de código)\n\nHacé estas preguntas en UN solo mensaje, numeradas, y esperá las respuestas:\n\n1. ¿Cómo se llama tu negocio y a qué se dedica? (una o dos frases)\n2. ¿Qué querés que haga tu web? Elegí uno:\n   - **A. Vender** un producto o servicio (landing de venta)\n   - **B. Mostrar tu catálogo** de productos o servicios con precios\n   - **C. Capacitar** a tu equipo o a tus alumnos con videos (plataforma estilo Netflix)\n   - **D. Presentar** tu marca personal o tus servicios profesionales\n   - **E. Inscribir** gente a un evento, curso o taller\n3. ¿A quién le habla la web? (tu cliente ideal o tu equipo)\n4. ¿Qué tiene que hacer la persona al final? (escribirte por WhatsApp, pagar, inscribirse, ver las clases)\n5. Tu número de WhatsApp con código de país (ej.: 595 981 123 456) y tus redes.\n6. Colores de tu marca y si tenés logo (subilo). Si no sabés, decí \"elegí vos\".\n7. El contenido según lo que elegiste:\n   - A / D / E: qué ofrecés, precio, qué incluye, garantía, preguntas frecuentes, testimonios REALES (si no tenés, no pasa nada).\n   - B: lista de productos o servicios con nombre, precio, descripción corta, categoría y foto. Puede ser una planilla, un PDF o un texto.\n   - C: los módulos y clases, y los links de tus videos (YouTube \"no listado\" o Vimeo). Si es un solo video largo, decime en qué minuto empieza cada clase.\n8. Fotos tuyas o de tu negocio que quieras usar (subilas).\n\nSi la persona no tiene alguna respuesta, proponé una opción razonable, decí cuál elegiste y seguí. No la trabes con más preguntas.\n\n## Paso 2 · Reglas de construcción (valen para todos los modelos)\n\n- **Un solo archivo `index.html`** con su CSS y JavaScript adentro. Las fotos van en una carpeta `media/` al lado. Nada de frameworks ni instalaciones.\n- **Primero el celular**: la mayoría la va a abrir desde el teléfono. Probá mentalmente cada sección a 360 px de ancho: nada se sale de la pantalla, botones de al menos 44 px de alto, texto de cuerpo de 16 px.\n- **Botón de WhatsApp** con mensaje ya escrito: `https://wa.me/NUMERO?text=` + `encodeURIComponent(\"Hola, quiero …\")`. El número va sin \"+\", sin espacios y sin el 0 inicial (ej.: 595981123456). Ponelo arriba, en la oferta, al final, y como barra fija abajo en el celular.\n- **Fuentes** de Google Fonts, como máximo dos. **Colores** de la marca: uno dominante, uno de apoyo y uno de acento para los botones.\n- **SEO básico**: `<title>`, `<meta name=\"description\">`, `<meta property=\"og:title\">`, `og:description` y `og:image` para que el link se vea lindo al compartirlo por WhatsApp.\n- **Nunca inventes** testimonios, cifras, premios, clientes ni precios. Si falta un dato, dejá un texto claro para que lo complete (ej.: \"Escribí acá tu garantía\") y avisale en tu respuesta.\n- Los datos que cambian seguido (productos, clases, precios) van en un **arreglo de JavaScript al principio del script**, con un comentario en español que diga \"EDITÁ ACÁ\". Así la persona los puede cambiar sola.\n- Textos cortos, en el idioma de su cliente. Cada sección responde una pregunta que el cliente se hace.\n\n## Paso 3 · Construí según el modelo\n\n### A. Landing de venta\nSecciones en este orden:\n1. **Portada**: promesa clara en una frase (qué logra el cliente y en cuánto tiempo), subtítulo, botón principal y foto o imagen del producto.\n2. **El dolor**: 3 a 5 situaciones que vive el cliente hoy, contadas como él las diría.\n3. **La solución**: qué es el producto en dos frases.\n4. **Qué incluye**: lista de lo que recibe, con íconos simples en SVG.\n5. **Cómo funciona**: 3 pasos.\n6. **Quién está detrás**: foto y una historia corta y verdadera.\n7. **Testimonios** (solo si son reales).\n8. **Oferta**: precio grande, todo lo que incluye, garantía y botón.\n9. **Preguntas frecuentes** con `<details>`.\n10. **Cierre** con el último llamado a la acción y el WhatsApp visible como texto.\n\n### B. Catálogo de productos o servicios\n- Portada con el nombre del negocio, una frase de valor y un buscador.\n- Filtros por categoría como botones (chips) que se pueden tocar.\n- Tarjetas con foto, nombre, precio, descripción corta y un botón \"Consultar por WhatsApp\" que manda el nombre del producto en el mensaje.\n- Al tocar una tarjeta se abre un detalle con más fotos y descripción.\n- Datos en un arreglo `PRODUCTOS = [{id, nombre, categoria, precio, descripcion, fotos:[…]}]`. Precios con separador de miles del país (ej.: Gs. 150.000).\n- Pie con dirección, horarios, mapa (link a Google Maps) y redes.\n\n### C. Plataforma de capacitación estilo Netflix\nEs para capacitación interna de colaboradores o para vender un curso. Incluí:\n- **Registro de entrada**: nombre, apellido y WhatsApp. Se guarda en el navegador (`localStorage`) para recordar el avance.\n- **Portada** con la \"próxima clase\" de esa persona y botones \"Reproducir\" y \"Más información\".\n- **Filas por módulo** con miniaturas que se deslizan hacia los costados (scroll horizontal con `scroll-snap`), y flechas en la compu.\n- **Reproductor** en una ventana encima: YouTube embebido (`https://www.youtube-nocookie.com/embed/ID?start=SEG&end=SEG&rel=0`) o Vimeo (`https://player.vimeo.com/video/ID`). Si es un solo video largo, cada clase usa su `start` y `end` en segundos.\n- **Marcar como vista**, barra de progreso por clase y porcentaje total del curso.\n- **Guía PDF por clase** (link de descarga) si la persona las tiene.\n- **Cuestionario por módulo**: 3 a 5 preguntas de opción múltiple, con nota mínima para aprobar.\n- **Certificado** al terminar: se genera en pantalla con el nombre del alumno, la fecha y el nombre del curso, listo para sacarle captura o imprimir.\n- **Panel de seguimiento (opcional)**: si la persona quiere ver quién avanza, explicale cómo crear una planilla de Google con Apps Script y pegá este código en Extensiones › Apps Script, implementado como \"Aplicación web\" con acceso \"Cualquier usuario\":\n\n```javascript\nfunction doPost(e){\n  const hoja = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];\n  const d = JSON.parse(e.postData.contents);\n  hoja.appendRow([new Date(), d.nombre, d.apellido, d.whatsapp, d.evento, d.detalle]);\n  return ContentService.createTextOutput(\"ok\");\n}\n```\n\n  En la web, cada registro y cada clase vista hace `fetch(URL, {method:\"POST\", mode:\"no-cors\", body: JSON.stringify({...})})`. Dejá la URL en una constante `API = \"\"` al principio y explicá que si queda vacía, la web funciona igual sin panel.\n- Datos en `MODULOS = [...]` y `CLASES = [{n, modulo, titulo, descripcion, video, inicio, fin, pdf}]`.\n\n### D. Marca personal o servicios profesionales\nPortada con foto grande y quién sos en una frase, servicios en tarjetas con precio \"desde\", trabajos o casos reales, proceso de trabajo en pasos, sobre mí, contacto con WhatsApp y redes.\n\n### E. Inscripción a evento, curso o taller\nPortada con fecha, hora y lugar bien visibles, cuenta regresiva, qué vas a aprender, quién lo dicta, cupos y precio, formulario que arma el mensaje de WhatsApp con nombre y datos (no hay servidor: el formulario no envía nada solo), y un link para agendarlo en Google Calendar.\n\n## Paso 4 · Entregá y ajustá\n\n1. Mostrale la web terminada en vista previa.\n2. Preguntale en una sola frase qué quiere cambiar: textos, colores, fotos, orden de secciones.\n3. Hacé los cambios sin rehacer todo. Repetí hasta que diga \"listo\".\n4. Entregale los archivos: `index.html` y la carpeta `media/` con sus fotos. Si estás en un entorno donde podés crear un ZIP, entregale todo en un ZIP llamado `mi-web.zip`.\n\n## Paso 5 · Publicala con link propio (gratis, en GitHub Pages)\n\nGuiala paso por paso, de a un paso por vez, y esperá que confirme antes de seguir:\n\n1. Entrá a **github.com** y creá una cuenta gratis. El nombre de usuario va a ser parte de tu link (ej.: `minegocio` → `minegocio.github.io`), elegilo corto y sin tu nombre si preferís.\n2. Tocá **\"+\" › New repository**. En el nombre escribí exactamente `tuusuario.github.io` (con tu usuario). Marcá **Public** y tocá **Create repository**.\n3. Tocá **\"uploading an existing file\"**, arrastrá tu `index.html` y la carpeta `media`, y tocá **Commit changes**.\n4. Entrá a **Settings › Pages** y confirmá que diga \"Deploy from a branch\", rama `main`, carpeta `/ (root)`. Guardá.\n5. Esperá 1 o 2 minutos y abrí `https://tuusuario.github.io`. ¡Tu web está online!\n6. Para cambiarla después: entrá al repositorio, tocá `index.html`, el lápiz (✏️), pegá la versión nueva y **Commit changes**.\n\nAlternativa más rápida sin cuenta de GitHub: **app.netlify.com/drop** — arrastrás la carpeta y te da un link al instante (para link propio y permanente conviene crear cuenta).\n\nSi quiere dominio propio (ej.: `minegocio.com.py`), explicale que se compra aparte y se conecta en **Settings › Pages › Custom domain**.\n\n## Paso 6 · Checklist final (revisalo con la persona antes de despedirte)\n\n- [ ] Se ve bien en el celular, sin nada cortado ni que se salga de la pantalla.\n- [ ] Todos los botones de WhatsApp abren el chat correcto con el mensaje escrito.\n- [ ] Precios, número, dirección y horarios están bien escritos.\n- [ ] Las fotos cargan y no pesan más de 300 KB cada una.\n- [ ] El título y la descripción se ven bien al compartir el link por WhatsApp.\n- [ ] (Plataforma) Cada clase abre su video correcto y el avance se guarda.\n- [ ] La web está publicada y el link funciona desde otro teléfono.\n- [ ] El link está en la bio de Instagram, en el estado de WhatsApp y en Google Maps.\n\nCerrá con una sola sugerencia concreta de próximo paso (por ejemplo: \"compartí el link en tu estado de WhatsApp hoy\").\n";
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const MOD = Object.fromEntries(DATA.mods.map(m => [m.n, m]));
+const CL = DATA.classes, TOTAL = CL.length;
+const KEY = "webia_v1";
+let ST = {user:null, done:{}, ck:{}};
+try { ST = Object.assign(ST, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(ST)); } catch (e) {} };
+const wa = t => `https://wa.me/${WA_NUM}?text=${encodeURIComponent(t)}`;
+const nm = () => ST.user ? `${ST.user.nombre} ${ST.user.apellido}` : "";
+const pdf = n => `../recursos/Guia_Clase_${String(n).padStart(2,"0")}.pdf`;
+function toast(t){ const el=$("#toast"); el.textContent=t; el.classList.add("on"); clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.remove("on"),1800); }
+function send(tipo, detalle){ if(!API||!ST.user) return; try{ fetch(API,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({nombre:ST.user.nombre,apellido:ST.user.apellido,whatsapp:ST.user.wa,evento:tipo,detalle:detalle||""})}).catch(()=>{}); }catch(e){} }
+async function copy(t){ try{ await navigator.clipboard.writeText(t); toast("¡Copiado!"); }catch(e){ toast("Seleccioná el texto y copialo"); } }
+
+function render(){
+  const done = CL.filter(c => ST.done[c.n]).length, p = Math.round(done / TOTAL * 100);
+  $("#pct").textContent = p + "%"; $("#pctT").textContent = `${done} de ${TOTAL} clases vistas`;
+  $("#ringC").setAttribute("stroke-dasharray", `${p} 100`);
+  $("#mbar").innerHTML = DATA.mods.map(m => { const cs = CL.filter(c => c.mod === m.n), d = cs.filter(c => ST.done[c.n]).length;
+    return `<div><div class="t"><span>${m.n}. ${esc(m.name)} · ${esc(m.hora)}</span><span>${d}/${cs.length}</span></div><div class="track"><i style="width:${d/cs.length*100}%;background:${m.color}"></i></div></div>`; }).join("");
+  const next = CL.find(c => !ST.done[c.n]) || CL[0], all = done === TOTAL, m = MOD[next.mod];
+  $("#inicio").style.setProperty("--hc", m.color);
+  $("#hTag").textContent = all ? "¡Curso completado! Repasá cuando quieras" : (done ? "Tu próxima clase" : "Empezá por acá");
+  $("#hTitle").textContent = next.title; $("#hEp").textContent = `Clase ${next.n} de ${TOTAL}`;
+  $("#hMod").textContent = `Módulo ${m.n} · ${m.name}`; $("#hDesc").textContent = next.desc;
+  $("#hPlay").onclick = () => openC(next.n);
+  $("#clT").textContent = `${TOTAL} clases · 3 módulos · ${done} vistas`;
+  $("#rows").innerHTML = DATA.mods.map(m => `<div class="row" style="--mc:${m.color}"><h3 class="rt"><i></i>Módulo ${m.n} · ${esc(m.full)} <span>${esc(m.hora)}</span></h3><div class="scroller">` +
+    CL.filter(c => c.mod === m.n).map(c => `<button class="card ${ST.done[c.n]?"done":""}" data-n="${c.n}" style="--mc:${m.color}"><div class="th"><span class="seen">✓ VISTA</span><span class="n">${c.n}</span><span class="tt">${esc(c.title)}</span></div><div class="cb">${esc(c.desc.slice(0,90))}… <span class="pdf">+ PDF</span></div></button>`).join("") + `</div></div>`).join("");
+  document.querySelectorAll(".card").forEach(b => b.onclick = () => openC(+b.dataset.n));
+  $("#who").innerHTML = ST.user ? `Hola, <b>${esc(ST.user.nombre)}</b>` : "";
+  sup();
+}
+function sup(){
+  const t0 = ST.user && ST.user.t ? ST.user.t : Date.now(), left = Math.ceil((t0 + 7*864e5 - Date.now()) / 864e5);
+  $("#supD").textContent = left > 0 ? `${left} ${left===1?"día":"días"} restantes` : "Soporte finalizado";
+  $("#supB").href = wa(`Hola Jesús, soy ${nm()}. Necesito ayuda con mi web (curso Tu Web con IA en un Día).`);
+  $("#liveB").href = wa(`Hola Jesús, soy ${nm()}. Quiero agendar mi sesión en vivo de 1 hora del curso Tu Web con IA.`);
+  $("#garB").href = wa(`Hola Jesús, soy ${nm()}. Quiero consultar sobre la garantía del curso Tu Web con IA.`);
+  const rv = () => $("#revB").href = wa(`Hola Jesús, soy ${nm()}. Te envío mi web para la revisión: ${$("#revL").value.trim() || "(pegá tu link)"}`);
+  $("#revL").oninput = rv; rv();
+}
+let cur = null;
+function openC(n){
+  const c = CL.find(x => x.n === n), m = MOD[c.mod]; cur = c;
+  const k = CORTES[n] || [0,0], id = (k && k.id) || VIDEO_ID;
+  $("#player").innerHTML = id ? `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?rel=0&modestbranding=1&playsinline=1${Array.isArray(k)&&k[1]?`&start=${k[0]}&end=${k[1]}`:""}" title="${esc(c.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`
+    : `<div class="soon"><b>El video de esta clase se publica muy pronto</b>Mientras tanto, descargá la guía PDF y adelantá el ejercicio.</div>`;
+  $("#mTag").textContent = `Módulo ${m.n} · ${m.name} · Clase ${c.n} de ${TOTAL}`; $("#mTag").style.setProperty("--hc", m.color);
+  $("#mT").textContent = c.title; $("#mD").textContent = c.desc; $("#mK").textContent = "Idea clave: " + c.idea;
+  $("#mP").innerHTML = c.pasos.map(p => `<li>${esc(p)}</li>`).join("");
+  $("#mPdf").href = pdf(c.n); $("#mN").style.display = n < TOTAL ? "" : "none";
+  vb(); $("#modal").classList.add("show"); $("#modal").scrollTop = 0; document.body.style.overflow = "hidden";
+  send("abrió clase", `${c.n}. ${c.title}`);
+}
+function vb(){ const on = !!ST.done[cur.n]; $("#mV").classList.toggle("on", on); $("#mV").textContent = on ? "✓ Vista" : "✓ Marcar como vista"; }
+function closeM(){ $("#modal").classList.remove("show"); $("#player").innerHTML = ""; document.body.style.overflow = ""; render(); }
+$("#mX").onclick = closeM; $("#modal").onclick = e => { if (e.target.id === "modal") closeM(); };
+document.addEventListener("keydown", e => { if (e.key === "Escape" && $("#modal").classList.contains("show")) closeM(); });
+$("#mV").onclick = () => { if (ST.done[cur.n]) delete ST.done[cur.n]; else { ST.done[cur.n] = 1; send("clase vista", `${cur.n}. ${cur.title}`); toast("¡Clase completada!"); } save(); vb(); };
+$("#mN").onclick = () => { if (!ST.done[cur.n]) { ST.done[cur.n] = 1; save(); } openC(cur.n + 1); };
+
+$("#rutaL").innerHTML = DATA.ruta.map((r, i) => { const c = ["#3b82f6","#3b82f6","#f59e0b","#f59e0b","#94a3b8","#f59e0b","#22c55e","#22c55e","#e50914"][i];
+  return `<div class="stop" style="--c:${c}"><b>${esc(r.h)}</b><small>${esc(r.d)}</small><h3>${esc(r.t)}</h3><p>${esc(r.x)}</p></div>`; }).join("");
+$("#skillTxt").textContent = SKILL; $("#cpSkill").onclick = () => copy(SKILL);
+
+const RES = [
+  ["Mapa de ruta", "Tu día hora por hora, de 08:00 a 17:00, para llegar con tu web online.", "Mapa_de_Ruta_Tu_Web_en_un_Dia.pdf"],
+  ["Checklist completo", "De cero a tu web publicada: 28 puntos en 5 etapas.", "Checklist_Tu_Web_en_un_Dia.pdf"],
+  ["Plantilla de contenido", "Completala antes de construir + la estructura de una landing que vende.", "Plantilla_de_Contenido_y_Landing.pdf"],
+  ["Banco de prompts", "15 prompts probados para textos, diseño, catálogo, capacitación y publicación.", "Banco_de_Prompts.pdf"],
+  ["Guía de la clase 1", "Cada clase tiene su guía PDF con pasos, ejercicio y checklist: la encontrás dentro de cada clase.", "Guia_Clase_01.pdf"]];
+$("#resG").innerHTML = RES.map(r => `<div class="res"><h3>${esc(r[0])}</h3><p>${esc(r[1])}</p><div class="a"><a class="btn ghost sm" href="../recursos/${r[2]}" target="_blank" rel="noopener">Ver</a><a class="btn ghost sm" href="../recursos/${r[2]}" download>Descargar</a></div></div>`).join("");
+
+let tab = "prompts";
+function drawTab(){
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("on", t.dataset.t === tab));
+  if (tab === "prompts") {
+    $("#tabP").innerHTML = `<div class="pl">${DATA.prompts.map((p, i) => `<div class="pr"><small>${esc(p.cat.toUpperCase())}</small><h4>${esc(p.t)}</h4><p>${esc(p.p)}</p><button class="btn ghost sm" data-i="${i}">Copiar prompt</button></div>`).join("")}</div>`;
+    document.querySelectorAll(".pr button").forEach(b => b.onclick = () => copy(DATA.prompts[+b.dataset.i].p));
+  } else {
+    $("#tabP").innerHTML = `<div class="ck">${DATA.checklist.map((g, gi) => { const d = g.items.filter((_, i) => ST.ck[gi+"-"+i]).length;
+      return `<div class="cg"><h4>${esc(g.g)} <span>${d}/${g.items.length}</span></h4>${g.items.map((it, i) => `<label><input type="checkbox" data-k="${gi}-${i}" ${ST.ck[gi+"-"+i]?"checked":""}>${esc(it)}</label>`).join("")}</div>`; }).join("")}</div>`;
+    document.querySelectorAll(".cg input").forEach(x => x.onchange = () => { if (x.checked) ST.ck[x.dataset.k] = 1; else delete ST.ck[x.dataset.k]; save(); drawTab(); });
+  }
+}
+document.querySelectorAll(".tab").forEach(t => t.onclick = () => { tab = t.dataset.t; drawTab(); });
+
+$("#regF").addEventListener("submit", e => {
+  e.preventDefault();
+  const n = $("#rN").value.trim(), a = $("#rA").value.trim(), w = $("#rW").value.trim();
+  if (n.length < 2 || a.length < 2) { $("#rE").textContent = "Escribí tu nombre y tu apellido."; return; }
+  if (w.replace(/\D/g, "").length < 8) { $("#rE").textContent = "Escribí tu WhatsApp con código de área (ej.: 0981 123 456)."; return; }
+  ST.user = {nombre:n, apellido:a, wa:w, t:Date.now()}; save(); $("#reg").classList.remove("show"); render(); send("registro", "");
+});
+if (!ST.user) $("#reg").classList.add("show");
+render(); drawTab();
+}
+</script>
+</body>
+</html>
